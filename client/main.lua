@@ -182,7 +182,7 @@ if ESX.GetConfig().Multichar then
 	end
 	local _slots
 	function SelectCharacterMenu(Characters, slots)
-		local playerslots = 1
+		local playerslots = slots
 		_slots = slots
 		SetNuiFocus(true, true)
 		local Character = next(Characters)
@@ -190,7 +190,6 @@ if ESX.GetConfig().Multichar then
 			if not v.model and v.skin then
 				if v.skin.model then v.model = v.skin.model elseif v.skin.sex == 1 then v.model = mp_f_freemode_01 else v.model = mp_m_freemode_01 end
 			end
-			playerslots = playerslots + 1
 			if not spawned then SetupCharacter(Character) end
 
 			local label = v.firstname..' '..v.lastname
@@ -201,14 +200,9 @@ if ESX.GetConfig().Multichar then
 				label = label,
 				job = _job
 			})
-			--[[if Characters[k].disabled then
-				elements[#elements+1] = {title = label,icon = "fa-regular fa-user", value = v.id}
-			else
-				elements[#elements+1] = {title = label,icon = "fa-regular fa-user", value = v.id}
-			end--]]
 		end
 		print(playerslots)
-		if  playerslots < 5 then
+		if  playerslots >= 2 then
 			SendNUIMessage({
 				type = '_createcharacters',
 				value = 100,
@@ -220,15 +214,6 @@ if ESX.GetConfig().Multichar then
 			action = "openui",
 			character = Characters[spawned]
 		})
-		
-			--elements[#elements+1] = {title = TranslateCap('create_char'), icon = "fa-solid fa-plus", value = (#elements+1), new = true}
-
-
-		--[[ESX.OpenContext("left", elements, function(menu, SelectedCharacter)
-			if SelectedCharacter.new then
-				ESX.CloseContext()
-
-		end, nil, false)--]]
 	end
 
 
