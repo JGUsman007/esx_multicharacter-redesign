@@ -218,13 +218,15 @@ if ESX.GetConfig().Multichar then
 
 
 	RegisterNUICallback('deletecharacter', function(data, cb)
-		SendNUIMessage({
-			type = 'resetdata'
-		})
-		local value = data
-		TriggerServerEvent('esx_multicharacter:DeleteCharacter', value)
-		spawned = false
-		SetNuiFocus(false, false)
+		if Config.CanDelete then
+			SendNUIMessage({
+				type = 'resetdata'
+			})
+			local value = data
+			TriggerServerEvent('esx_multicharacter:DeleteCharacter', value)
+			spawned = false
+			SetNuiFocus(false, false)
+		end
 	end)
 
 	RegisterNUICallback('selectcharacter', function(data, cb)
