@@ -24,7 +24,7 @@ end
 
 	local DB_TABLES = {users = 'identifier'}
 	local FETCH = nil
-	local SLOTS = Config.Slots or 4
+	local SLOTS = Config.Slots
 	local PREFIX = Config.Prefix or 'char'
 	local PRIMARY_IDENTIFIER = ESX.GetConfig().Identifier or GetConvar('sv_lan', '') == 'true' and 'ip' or "license"
 
@@ -125,7 +125,7 @@ end
 
 	local function DeleteCharacter(source, charid)
 		local identifier = ('%s%s:%s'):format(PREFIX, charid, GetIdentifier(source))
-		local query = 'DELETE FROM %s WHERE %s = ?'
+		local query = 'DELETE FROM `users` WHERE `identifier` = ?'
 		local queries = {}
 		local count = 0
 
@@ -233,6 +233,8 @@ end
 	RegisterNetEvent('esx_multicharacter:DeleteCharacter', function(charid)
 		if Config.CanDelete and type(charid) == 'number' and string.len(charid) <= 2 then
 			DeleteCharacter(source, charid)
+		else
+			print('########## Delete is set to false ##########')
 		end
 	end)
 
