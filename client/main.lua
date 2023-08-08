@@ -216,7 +216,6 @@ if ESX.GetConfig().Multichar then
 		})
 	end
 
-
 	RegisterNUICallback('deletecharacter', function(data, cb)
 		if Config.CanDelete then
 			SendNUIMessage({
