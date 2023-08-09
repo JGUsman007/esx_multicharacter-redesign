@@ -36,6 +36,7 @@ var money = Intl.NumberFormat("en-US", {
           data.sex +
           "<span>" +
           `<span class="material-symbols-outlined">
+          </span>` +
           "</span></p></div>"
       )
       .attr("data-ischar", "true");
